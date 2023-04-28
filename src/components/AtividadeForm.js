@@ -1,7 +1,12 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 
 export default function AtividadeForm(props) {
   const[atividade,setAtividade] = useState({})
+  const[mensagem,setMensagem] = useState({})
+
+  useEffect(()=>{
+    console.log("useEffect funciona")
+  },[])
   
   const inputTextHandler = (e) => {
     const {name, value} = e.target;
