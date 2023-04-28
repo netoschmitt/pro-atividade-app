@@ -25,6 +25,13 @@ export default function AtividadeForm(props) {
     setAtividade({...atividade, [name]: value})
   }
 
+  const handleCancelar = (e) => {
+    e.preventDefault();
+    //cancelarAtividade()
+    setAtividade(atividadeInicial);
+  }
+ 
+
   function atividadeAtual() {
     if(props.ativSelecionada.id !== 0){
       return props.ativSelecionada
@@ -35,6 +42,8 @@ export default function AtividadeForm(props) {
   }
 
   return (
+    <>
+    <h1>Atividade {atividade.id !== 0 ? atividade.id : ''}</h1>
     <form className="row g-3">
         <div className="col-md-6">
           <label className="form-label">Título</label>
@@ -72,28 +81,31 @@ export default function AtividadeForm(props) {
         <hr/>
 
         <div className="col-12">
-          <button className='btn btn-outline-secondary' onClick={props.addAtividade}>
-              + Atividade 
-          </button>
+          { atividade.id === 0 ? (
+            <button 
+              className='btn btn-outline-secondary' 
+              onClick={props.addAtividade}>
+              <i className='fas fa-plus me-2'></i>  
+              Atividade 
+            </button>
+           ) : ( 
+            <>
+              <button 
+                className='btn btn-outline-success' type="submit">
+                <i className='fas fa-save me-2'></i>  
+              Salvar 
+            </button>
+            <button 
+              className='btn btn-outline-warning' 
+              onClick={handleCancelar}>
+              <i className='fas fa-cancel me-2'></i>  
+              Cancelar
+            </button>
+            </>
+          )}
         </div>
     </form>
+    </>
   )
 }
 
-
-
-
-// <div className="col-md-6">
-// <label className="form-label">Id</label>
-// <input 
-//   id='id' 
-//   type="text" 
-//   className="form-control"
-//   // inputTextHandler
-//   name='id'
-//   onChange={inputTextHandler}
-
-
-//   //  retorna maior elemento do id + 1 :>>>>>  Math.max.apply(Math, props.atividades.map(item => item.id)) + 1
-//   value={atividade.id}  />
-// </div>
