@@ -27,7 +27,11 @@ export default function AtividadeForm(props) {
         </div>
         <div className="col-md-6">
         <label className="form-label">Prioridade</label>
-        <select id="prioridade" className="form-select">
+        <select
+            name='prioridade'
+            value={atividade.prioridade}
+            onChange={inputTextHandler}
+            id="prioridade" className="form-select">
             <option defaultValue="0">Selecione...</option>
             <option value='1'>Baixa</option>
             <option value='2'>Normal</option>
@@ -37,12 +41,20 @@ export default function AtividadeForm(props) {
 
         <div className="col-md-6">
         <label className="form-label">Título</label>
-        <input id='titulo' type="text" className="form-control" />
+        <input
+              name='titulo'
+              value={atividade.titulo}
+              onChange={inputTextHandler}
+              id='titulo' type="text" className="form-control" />
         </div>
 
         <div className="col-md-6">
         <label className="form-label">Descrição</label>
-        <input id='descricao' type="text" className="form-control" />
+        <input
+              name='descricao'
+              value={atividade.descricao}
+              onChange={inputTextHandler}
+              id='descricao' type="text" className="form-control" />
         </div>
         <hr/>
 
