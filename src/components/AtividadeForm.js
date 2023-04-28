@@ -1,19 +1,39 @@
 import  { useEffect, useState } from 'react'
 
-export default function AtividadeForm(props) {
-  const[atividade,setAtividade] = useState({})
-  const[mensagem,setMensagem] = useState({})
+const atividadeInicial = {
+  id:0,
+  titulo:'',
+  prioridade:0,
+  descricao: ''
+}
 
+
+export default function AtividadeForm(props) {
+  const[atividade,setAtividade] = useState(atividadeAtual())
+
+  // se ativSel. existir => setAtividade
   useEffect(()=>{
-    console.log("useEffect funciona")
-  },[])
+    if(props.ativSelecionada.id !== 0)
+      setAtividade(props.ativSelecionada);
+  }, [props.ativSelecionada]);  // vigiando o ativSelecionada
+  
   
   const inputTextHandler = (e) => {
     const {name, value} = e.target;
-    //console.log(value);
+
     //add + 1 propriedade ao obj
     setAtividade({...atividade, [name]: value})
   }
+
+  function atividadeAtual() {
+    if(props.ativSelecionada.id !== 0){
+      return props.ativSelecionada
+    }
+    else{
+      return atividadeInicial;
+    }
+  }
+
   return (
     <form className="row g-3">
         <div className="col-md-6">
