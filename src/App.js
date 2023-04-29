@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './App.css';
 import AtividadeForm from './components/AtividadeForm';
 import AtividadeLista from './components/AtividadeLista';
@@ -19,21 +19,20 @@ let initialState = [
 ]
 
 function App() {
-  const [atividades, setAtividades] = useState(initialState)
-  const [atividade, setAtividade] = useState({})
+  const [index, setIndex] = useState(0);
+  const [atividades, setAtividades] = useState(initialState);
+  const [atividade, setAtividade] = useState({});
 
-  function addAtividade(e) {
-    e.preventDefault();
+  useEffect(() => {
+    atividades.length <= 0 ? setIndex(1) : 
+    setIndex(Math.max.apply(Math, atividades.map(item => item.id)) + 1,)
+  }, [atividades]);
 
-    const atividade = {
-      id: Math.max.apply(Math, atividades.map(item => item.id)) + 1,
-      prioridade: document.getElementById('prioridade').value,
-      titulo: document.getElementById('titulo').value,
-      descricao: document.getElementById('descricao').value,
-    };
-
+  function addAtividade(ativ) {
     // criando um array -> coloca todos em atividades -> ... new obj
-    setAtividades([...atividades, {...atividade}]);
+    setAtividades([...atividades,
+         {...ativ, id: index }]
+    );
   }
 
   function cancelarAtividade(){

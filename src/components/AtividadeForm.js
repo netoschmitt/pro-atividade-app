@@ -25,16 +25,16 @@ export default function AtividadeForm(props) {
     setAtividade({...atividade, [name]: value})
   }
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(props.ativSelecionada.id !== 0)
-        props.atualizarAtividade(atividade);
-    else
-      props.addAtividade(atividade);
+    if(props.ativSelecionada.id !== 0) props.atualizarAtividade(atividade);
+    else props.addAtividade(atividade);
 
     setAtividade(atividadeInicial);
   }
+
 
   const handleCancelar = (e) => {
     e.preventDefault();
