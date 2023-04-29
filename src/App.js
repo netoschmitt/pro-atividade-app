@@ -36,6 +36,16 @@ function App() {
     setAtividades([...atividades, {...atividade}]);
   }
 
+  function cancelarAtividade(){
+    setAtividade({id: 0});
+  }
+
+  // para cada item em atid.. se for = substitui ativ, senao mantem
+  function atualizarAtividade(ativ) {
+    setAtividades(atividades.map(item => item.id === ativ.id ? ativ : item));
+    setAtividade({id: 0})
+  }
+
   function deletarAtividade(id){
     const atividadesFiltradas = atividades.filter(atividade => atividade.id !== id);
     setAtividades([...atividadesFiltradas])
@@ -50,6 +60,8 @@ function App() {
     <>
       <AtividadeForm 
           addAtividade={addAtividade}
+          cancelarAtividade={cancelarAtividade}
+          atualizarAtividade={atualizarAtividade}
           ativSelecionada={atividade}
           atividades={atividades}
       />

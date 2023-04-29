@@ -25,9 +25,22 @@ export default function AtividadeForm(props) {
     setAtividade({...atividade, [name]: value})
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(props.ativSelecionada.id !== 0)
+        props.atualizarAtividade(atividade);
+    else
+      props.addAtividade(atividade);
+
+    setAtividade(atividadeInicial);
+  }
+
   const handleCancelar = (e) => {
     e.preventDefault();
-    //cancelarAtividade()
+    
+    props.cancelarAtividade();
+    
     setAtividade(atividadeInicial);
   }
  
@@ -44,7 +57,7 @@ export default function AtividadeForm(props) {
   return (
     <>
     <h1>Atividade {atividade.id !== 0 ? atividade.id : ''}</h1>
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={handleSubmit}>
         <div className="col-md-6">
           <label className="form-label">Título</label>
           <input
@@ -84,14 +97,16 @@ export default function AtividadeForm(props) {
           { atividade.id === 0 ? (
             <button 
               className='btn btn-outline-secondary' 
-              onClick={props.addAtividade}>
+              type='submit'
+              >
               <i className='fas fa-plus me-2'></i>  
               Atividade 
             </button>
            ) : ( 
             <>
               <button 
-                className='btn btn-outline-success' type="submit">
+                className='btn btn-outline-success' 
+                type="submit">
                 <i className='fas fa-save me-2'></i>  
               Salvar 
             </button>
