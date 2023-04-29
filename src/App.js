@@ -3,25 +3,11 @@ import './App.css';
 import AtividadeForm from './components/AtividadeForm';
 import AtividadeLista from './components/AtividadeLista';
 
-let initialState = [
-  {
-    id: 1,
-    prioridade: '1',
-    titulo: 'titulo',
-    descricao: 'Primeira atividade',
-  },
-  {
-    id: 2,
-    prioridade: '1',
-    titulo: 'titulo',
-    descricao: 'Segunda atividade',
-  },
-]
 
 function App() {
   const [index, setIndex] = useState(0);
-  const [atividades, setAtividades] = useState(initialState);
-  const [atividade, setAtividade] = useState({});
+  const [atividades, setAtividades] = useState([]);
+  const [atividade, setAtividade] = useState({id:0});
 
   useEffect(() => {
     atividades.length <= 0 ? setIndex(1) : 
